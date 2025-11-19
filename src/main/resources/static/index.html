@@ -14,15 +14,11 @@
     <header class="site-header">
         <div class="brand">
             <a href="/" class="logo" aria-label="Pagina inicial">
-                <svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-                    <rect x="4" y="18" width="40" height="14" rx="7" fill="#0d47a1"/>
-                    <circle cx="16" cy="34" r="4" fill="#263238"/>
-                    <circle cx="32" cy="34" r="4" fill="#263238"/>
-                    <rect x="14" y="14" width="20" height="6" rx="3" fill="#42a5f5"/>
-                    <rect x="20" y="8" width="8" height="7" rx="2" fill="#0d47a1"/>
-                </svg>
-                <span class="brand-text">MultiCar</span>
-            </a>
+            <img src="./carro3d.png" class="logo-image">
+    </a>
+                
+                <span class="logo-text">MultiCar</span> 
+             </a>
         </div>
         <nav class="main-nav" aria-label="Menu principal">
             <ul>
@@ -49,17 +45,7 @@
                     <label for="pais-fabricante">País de Origem:</label>
 
                     <select id="pais-fabricante" name="pais-fabricante" required>
-                        <option value="" disabled selected>Selecione um país</option>
-                        <option value="Brasil">Brasil</option>
-                        <option value="Estados Unidos">Estados Unidos</option>
-                        <option value="Alemanha">Alemanha</option>
-                        <option value="Japão">Japão</option>
-                        <option value="Itália">Itália</option>
-                        <option value="França">França</option>
-                        <option value="Reino Unido">Reino Unido</option>
-                        <option value="Coreia do Sul">Coreia do Sul</option>
-                        <option value="China">China</option>
-                        <option value="Índia">Índia</option>
+                        
                     </select>
 
                     <button type="submit" class="btn primary">Enviar</button>
@@ -77,7 +63,33 @@
                     <button type="submit" class="btn primary">Enviar</button>
                 </form>
         </div>
-    </main>
+        <div id="modal-content-veiculo" class="modal-content">
+            <div id="modal-title">Cadastro de Veículo</div>
+            <form id="form-veiculo">
+               
+                <label for="placa-veiculo">Placa:</label>
+                <input type="text" id="placa-veiculo" name="placa-veiculo" placeholder="Placa do veículo">
+
+                <label for="cor-veiculo">Cor:</label>
+                <input type="text" id="cor-veiculo" name="cor-veiculo" placeholder="Cor do veículo">
+
+                <label for="preco-veiculo">Preço:</label>
+                <input type="number" id="preco-veiculo" name="preco-veiculo" placeholder="Preço do veículo">
+
+                <label for="ano-veiculo">Ano:</label>
+                <input type="number" id="ano-veiculo" name="ano-veiculo" placeholder="Ano do veículo">
+
+                <label for="descricao-veiculo">Descrição:</label>
+                <textarea id="descricao-veiculo" name="descricao-veiculo" placeholder="Descrição do veículo"></textarea>
+
+                <label for="modelo-veiculo">Modelo:</label>
+                <select id="modelo-veiculo" name="modelo-veiculo" required>
+                    <option value="" disabled selected>Selecione um modelo</option>
+                </select>
+          <button  class="btn primary">Enviar</button>
+            </form>
+        </div>
+        </main>
 
         <div class="container">
             <section id="fabricantes" class="section">
@@ -95,8 +107,8 @@
                 <p>Informações sobre Veículos</p>
                 <button id="novo-veiculo" class="botao-novo">Adicionar Veiculo</button>
             </section>
-        </div>
-
+         
+    
     </main>
 </body>
 </html>

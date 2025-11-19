@@ -21,38 +21,58 @@ import com.multimarcas.service.VeiculoService;
 @RestController
 @RequestMapping("/api/veiculos")
 public class VeiculoController {
-    
+
     @Autowired
     private VeiculoService service;
 
+    // Listar todos os veículos
     @GetMapping
-    public List<VeiculoDTO> listar(){
-        return service.listar();
+    public ResponseEntity<List<VeiculoDTO>> listar() {
+        return ResponseEntity.ok(service.listar());
     }
 
+    // Buscar veículo por ID
     @GetMapping("/{id}")
-    public VeiculoDTO buscar (Long id){
-        return service.buscarPorId(id);
+    public ResponseEntity<VeiculoDTO> buscar(@PathVariable Long id) {
+        VeiculoDTO veiculo = service.buscarPorId(id);
+        return ResponseEntity.ok(veiculo);
     }
 
-    @PostMapping
-    public ResponseEntity<VeiculoDTO> criar(@RequestBody VeiculoDTO dto){
+    // Criar novo veículo
+    @PutMapping
+    public ResponseEntity<VeiculoDTO> criar(@RequestBody VeiculoDTO dto) {
         VeiculoDTO criado = service.criar(dto);
-         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(criado.getId())
                 .toUri();
         return ResponseEntity.created(location).body(criado);
     }
 
+    // Atualizar veículo por ID
     @PutMapping("/{id}")
-    public VeiculoDTO atualizar(@PathVariable Long id, @RequestBody VeiculoDTO dto){
-        return service.atualizar(id, dto);
+    public ResponseEntity<VeiculoDTO> atualizar(@PathVariable Long id, @RequestBody VeiculoDTO dto) {
+        VeiculoDTO atualizado = service.atualizar(id, dto);
+        return ResponseEntity.ok(atualizado);
     }
 
+    // Deletar veículo por ID
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id){
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
         service.deletar(id);
         return ResponseEntity.noContent().build();
     }
+
+    // Verificar se placa existe
+    @GetMapping("/existe/{placa}")
+    public ResponseEntity<Boolean> existePorPlaca(@PathVariable String placa) {
+        boolean existe = service.buscarPorPlaca(placa);
+        return ResponseEntity.ok(existe);
+    }
+
+    // Buscar veículos por parte da placa (opcional)
+    // @GetMapping("/placa/{placa}")
+    // public ResponseEntity<List<VeiculoDTO>> buscarPorPartePlaca(@PathVariable String placa) {
+    //     return ResponseEntity.ok(service.buscarPorPlacaParcial(placa));
+    // }
 }

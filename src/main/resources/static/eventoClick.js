@@ -88,16 +88,60 @@ document.getElementById("form-modelo").addEventListener("submit", async function
         },
         body: JSON.stringify({
              nome: nome_modelo,
-             fabricanteId: fabricante_id
+             fabricante: {
+                id: fabricante_id
+            }
         })
     });
     if (require.status === 409) {
         alert("Conflito: O modelo já existe ou há um problema com os dados enviados.");
+        console.log(nome_modelo, fabricante_id);
     } else if (require.ok) {
-        alert("Modelo adicionado com sucesso!");
+        alert("Modelo adicionado com sucesso!" + nome_modelo, fabricante_id);
         modal.style.display = "none";
     } else {
         alert("Erro ao adicionar modelo.");
+    }
+});
+
+
+//evento de clique botão enviar formulario veículo
+document.getElementById("form-veiculo").addEventListener("submit", async function(event) {
+    event.preventDefault();
+    const placa_veiculo = document.getElementById("placa-veiculo").value;
+    const cor_veiculo = document.getElementById("cor-veiculo").value;
+    const preco_veiculo = document.getElementById("preco-veiculo").value;
+    const ano_veiculo = document.getElementById("ano-veiculo").value;
+    const descricao_veiculo = document.getElementById("descricao-veiculo").value;
+    const modelo_id = document.getElementById("modelo-veiculo").value;
+
+    const require = await fetch("http://localhost:8080/api/veiculos", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+             placa: placa_veiculo,
+             cor: cor_veiculo,
+             valor: preco_veiculo,
+             ano: ano_veiculo,
+             descricao: descricao_veiculo,
+             modelo: {
+                id: modelo_id
+            }
+        }),    
+
+    });
+
+    console.log(placa_veiculo, cor_veiculo, preco_veiculo, ano_veiculo, descricao_veiculo, modelo_id);
+
+    if (require.status === 409) {
+        alert("Conflito: O veículo já existe ou há um problema com os dados enviados.");
+    } else if (require.ok) {
+        alert("Veículo adicionado com sucesso!");
+        modal.style.display = "none";
+    } else {
+        alert("Erro ao adicionar veículo.");
     }
 });
 
@@ -115,6 +159,7 @@ document.getElementById("novo-modelo").addEventListener("click", async function(
             const option = document.createElement("option");
             option.value = fabricante.id;
             option.textContent = fabricante.nome;
+            option.ariaLabel = fabricante.paisOrigem;
             document.getElementById("fabricante-modelo").appendChild(option);
         });
 
@@ -135,6 +180,21 @@ document.getElementById("novo-fabricante").addEventListener("click", async funct
     setMostrarOcutarElemento(true, ".modal-content");
     modal.style.display = "block";
     setMostrarOcutarElemento(false, "#modal-content-fabricante");
+
+    //carregar json com nomes e paises do arquivo externo json
+ 
+    const dadosPaises = await getData("http://localhost:8080/paises.json");
+    const selectPais = document.getElementById("pais-fabricante");
+    setRemoverElementos("#pais-fabricante option");
+    dadosPaises.forEach(function(pais) {    
+        const option = document.createElement("option");
+        option.value = pais.sigla;
+        option.textContent = pais.nome_pais;
+        selectPais.appendChild(option);
+    });
+ 
+    modal.style.display = "block";
+    setMostrarOcutarElemento(false, "#modal-content-fabricante");
  });
 
  //evento de clique no botão adicionar modelo
@@ -143,3 +203,66 @@ document.getElementById("novo-fabricante").addEventListener("click", async funct
     modal.style.display = "block";
     setMostrarOcutarElemento(false, "#modal-content-modelo");
  } );
+
+ //evento de clique no botão adicionar veículo
+ document.getElementById("novo-veiculo").addEventListener("click", async function(event) {
+    setMostrarOcutarElemento(true, ".modal-content");
+    modal.style.display = "block";
+    setMostrarOcutarElemento(false, "#modal-content-veiculo");
+
+    const dadosModelos = await getData("http://localhost:8080/api/modelos");
+    if (dadosModelos.status === 400 || dadosModelos.error) {
+        alert("Erro ao carregar modelos para o formulário de veículo.");
+        return;
+    }
+
+    const dadosFabricantes = await getData("http://localhost:8080/api/fabricantes");
+    if (dadosFabricantes.status === 400 || dadosFabricantes.error) {
+        alert("Erro ao carregar fabricantes para o formulário de veículo.");
+        return;
+    }
+
+    dadosModelos.forEach(function(modelo) {
+        const option = document.createElement("option");
+        option.value = modelo.id;
+        option.textContent = modelo.nome;
+        option.ariaLabel = modelo.fabricante.nome;
+        document.getElementById("modelo-veiculo").appendChild(option);
+    });
+      
+      document.addEventListener("DOMContentLoaded", () => {
+    const modalDelete = document.getElementById("modal-delete");
+    const confirmBtn = document.getElementById("confirm-delete");
+    const cancelBtn = document.getElementById("cancel-delete");
+    const deleteMessage = document.getElementById("delete-message");
+
+    let itemIdToDelete = null;
+    let itemTypeToDelete = null;
+
+    // Abrir modal ao clicar no botão deletar
+    document.querySelectorAll(".btn-delete").forEach(btn => {
+        btn.addEventListener("click", () => {
+            itemIdToDelete = btn.getAttribute("data-id");
+            itemTypeToDelete = btn.getAttribute("data-type");
+            deleteMessage.textContent = `Deseja deletar este ${itemTypeToDelete}?`;
+            modalDelete.style.display = "flex";
+        });
+    });
+
+    // Confirmar exclusão
+    confirmBtn.addEventListener("click", () => {
+        console.log(`Deletando ${itemTypeToDelete} com ID: ${itemIdToDelete}`);
+        // Aqui você pode chamar sua função para remover do banco ou da tabela
+        modalDelete.style.display = "none";
+    });
+
+    // Cancelar exclusão
+    cancelBtn.addEventListener("click", () => {
+        modalDelete.style.display = "none";
+        itemIdToDelete = null;
+        itemTypeToDelete = null;
+    });
+});
+   
+
+ } );  

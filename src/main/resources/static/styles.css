@@ -3,12 +3,12 @@
 body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f7fa; color: #1f2933; }
 
 :root {
-  --brand-dark: #0d47a1;
-  --brand-mid: #1565c0;
-  --brand-accent: #42a5f5;
-  --brand-accent-soft: #e3f2fd;
+  --brand-dark: #2453d6;
+  --brand-mid: #0477eb;
+  --brand-accent: #11419b;
+  --brand-accent-soft: #e3f2fd7c;
   --text-color: #1f2933;
-  --border-color: #d9e2ec;
+  --border-color: #d9e2ecc2;
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 16px;
@@ -17,15 +17,14 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f7fa; color: #
 }
 
 .site-header {
-  background: #ffffffcc;
-  backdrop-filter: blur(6px);
+  background-color: #928d8d5b; /* Cinza claro */
+  padding: 12px 24px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 14px 40px;
-  border-bottom: 1px solid var(--border-color);
-  box-shadow: var(--shadow-sm);
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* opcional para dar profundidade */
 }
+
 .brand { display: flex; align-items: center; }
 .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
 .brand-text { font-size: 1.4rem; font-weight: 700; color: var(--brand-dark); letter-spacing: .5px; }
@@ -40,12 +39,40 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f7fa; color: #
 .btn { font: 500 0.9rem 'Segoe UI', Arial, sans-serif; cursor: pointer; border-radius: var(--radius-md); border: 1px solid transparent; padding: 10px 18px; letter-spacing: .4px; transition: .25s ease; position: relative; overflow: hidden; }
 .btn.primary { background: linear-gradient(90deg,var(--brand-dark),var(--brand-mid)); color: #fff; }
 .btn.primary:hover { filter: brightness(1.08); box-shadow: var(--shadow-md); }
-.btn.outline { background: #fff; border-color: var(--brand-dark); color: var(--brand-dark); }
+.btn.outline { background: #ffffffb6; border-color: var(--brand-dark); color: var(--brand-dark); }
 .btn.outline:hover { background: var(--brand-accent-soft); border-color: var(--brand-mid); }
 .btn:focus { outline: 2px solid var(--brand-accent); outline-offset: 2px; }
 
 /* Logo SVG refinamento */
 .logo svg { display: block; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15)); }
+
+.logo-image {
+  width: 85px;
+}
+
+.logo-text {
+  font-size: 45px;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(90deg, #1619dbcc, #ffffffc9, #0759d3, #4486d6);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 4s infinite linear;
+}
+
+@keyframes gradientMove {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
+}
+
 
 #modal{
   display: none;
@@ -59,6 +86,7 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f7fa; color: #
   box-shadow: var(--shadow-md);
   width: 300px;
   height: auto;
+
 }
 
 #close-modal{
@@ -113,6 +141,8 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f7fa; color: #
   cursor: pointer;
 }
 
+
+
 /* Tabela centralizada e estilizada */
 
 .container{
@@ -148,20 +178,21 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f7fa; color: #
   margin-bottom: 15px;
 }
 
-.botao-novo {
-  background: var(--brand-mid);
+button {
+  background: linear-gradient(45deg, #1e8fffc4, #0059ff);
   color: white;
   border: none;
   padding: 10px 20px;
-  border-radius: var(--radius-md);
+  border-radius: 8px;
   cursor: pointer;
-  margin-bottom: 20px;
-  font-weight: 500;
+  font-weight: bold;
+  transition: background 0.3s ease;
 }
 
-.botao-novo:hover {
-  background: var(--brand-dark);
+button:hover {
+  background: linear-gradient(45deg, #0077ff, #1e90ff);
 }
+
 
 /* Estilos da tabela */
 .tabela-dados {
@@ -258,4 +289,52 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f7fa; color: #
   .actions { justify-content: center; }
   .main-nav ul { flex-wrap: wrap; gap: 12px; }
   .site-header { padding: 10px 16px; }
+}
+.tabela-dados {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.tabela-dados thead tr:first-child th {
+  background-color: #1e73be;
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+  padding: 12px;
+}
+
+.tabela-dados thead tr:nth-child(2) th {
+  background-color: #f4f4f4;
+  color: #333;
+  font-weight: bold;
+  padding: 10px;
+  text-transform: uppercase;
+}
+
+.tabela-dados tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.tabela-dados td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.btn.delete {
+  background-color: #104774;
+  color: #fffffffd;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn.delete:hover {
+  background-color: #04101b;
 }

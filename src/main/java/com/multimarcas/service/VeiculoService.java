@@ -85,4 +85,19 @@ public class VeiculoService {
         repository.deleteById(id);
     }
 
+    
+
+
+   @Transactional(readOnly = true)
+        public boolean buscarPorPlaca(String placa){
+            return repository.existsByPlaca(placa);
+        }
+
 }
+
+   // @Transactiona(readOnly = true)
+    //    public List<VeiculoDTO> buscarporplacaParcial(String termo){
+    //      if (termo == null || termo.isBlank()) {
+     //       return listar();
+
+     
