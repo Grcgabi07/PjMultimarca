@@ -2,12 +2,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Pagina de automoveis</title>
-    <script defer src="./eventoClick.js"></script>
     <script defer src="./script.js"></script>
     <script defer src="./gerenciarElementos.js"></script>
     <script defer src="./fabricantes.js"></script>
     <script defer src="./modelos.js"></script>
     <script defer src="./veiculos.js"></script>
+    <script defer src="./eventoClick.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -27,88 +27,97 @@
                 <li><a id="bt-veiculo" class="nav-link" href="#veiculos">Veiculos</a></li>
             </ul>
         </nav>
-        <div class="actions">
-            <button class="btn primary">Login</button>
-            <button class="btn outline">Registrar</button>
-        </div>
-    </header>
-    <main>
-        <div id="modal">
-            <span id="close-modal" class="close-button">&times;</span>
-          <div id="modal-content-fabricante" class="modal-content">
-                <div id="modal-title">Cadastro de Fabricante</div>
-                <form id="form-fabricante">
-                    <label for="nome-fabricante">Nome do Fabricante:</label>
-                    <input type="text" id="nome-fabricante" name="nome-fabricante" placeholder="Nome do fabricante">
-        
+       
+   <div class="actions">
+    <button class="btn primary">Login</button>
+    <button class="btn outline">Registrar</button>
+</div>
+</header>
 
-                    <label for="pais-fabricante">País de Origem:</label>
+<main>
+<!-- Modal -->
+<div id="modal">
+    <span id="close-modal" class="close-button">&times;</span>
 
-                    <select id="pais-fabricante" name="pais-fabricante" required>
-                        
-                    </select>
+    <!-- Modal Fabricante -->
+    <div id="modal-content-fabricante" class="modal-content">
+        <div id="modal-title">Cadastro de Fabricante</div>
+        <form id="form-fabricante">
+            <label for="nome-fabricante">Nome do Fabricante:</label>
+            <input type="text" id="nome-fabricante" name="nome-fabricante" placeholder="Nome do fabricante">
 
-                    <button type="submit" class="btn primary">Enviar</button>
-                </form>
-          </div>
-          <div id="modal-content-modelo" class="modal-content">
-                <div id="modal-title">Cadastro de Modelo</div>
-                <form id="form-modelo">
-                    <label for="nome-modelo">Nome do Modelo:</label>
-                    <input type="text" id="nome-modelo" name="nome-modelo" placeholder="Nome do modelo">
-                    <label for="fabricante-modelo">Fabricante:</label>
-                    <select id="fabricante-modelo" name="fabricante-modelo" required>
-                        <option value="" disabled selected>Selecione um fabricante</option>
-                    </select>
-                    <button type="submit" class="btn primary">Enviar</button>
-                </form>
-        </div>
-        <div id="modal-content-veiculo" class="modal-content">
-            <div id="modal-title">Cadastro de Veículo</div>
-            <form id="form-veiculo">
-               
-                <label for="placa-veiculo">Placa:</label>
-                <input type="text" id="placa-veiculo" name="placa-veiculo" placeholder="Placa do veículo">
+            <label for="pais-fabricante">País de Origem:</label>
+            <select id="pais-fabricante" name="pais-fabricante" required></select>
 
-                <label for="cor-veiculo">Cor:</label>
-                <input type="text" id="cor-veiculo" name="cor-veiculo" placeholder="Cor do veículo">
+            <button type="submit" class="btn primary">Salvar</button>
+        </form>
+    </div>
 
-                <label for="preco-veiculo">Preço:</label>
-                <input type="number" id="preco-veiculo" name="preco-veiculo" placeholder="Preço do veículo">
+    <!-- Modal Modelo -->
+    <div id="modal-content-modelo" class="modal-content">
+        <div id="modal-title">Cadastro de Modelo</div>
+        <form id="form-modelo">
+            <label for="nome-modelo">Nome do Modelo:</label>
+            <input type="text" id="nome-modelo" name="nome-modelo" placeholder="Nome do modelo">
 
-                <label for="ano-veiculo">Ano:</label>
-                <input type="number" id="ano-veiculo" name="ano-veiculo" placeholder="Ano do veículo">
+            <label for="fabricante-modelo">Fabricante:</label>
+            <select id="fabricante-modelo" name="fabricante-modelo" required>
+                <option value="" disabled selected>Selecione um fabricante</option>
+            </select>
 
-                <label for="descricao-veiculo">Descrição:</label>
-                <textarea id="descricao-veiculo" name="descricao-veiculo" placeholder="Descrição do veículo"></textarea>
+            <button type="submit" class="btn primary">Salvar</button>
+        </form>
+    </div>
 
-                <label for="modelo-veiculo">Modelo:</label>
-                <select id="modelo-veiculo" name="modelo-veiculo" required>
-                    <option value="" disabled selected>Selecione um modelo</option>
-                </select>
-          <button  class="btn primary">Enviar</button>
-            </form>
-        </div>
-        </main>
+    <!-- Modal Veículo -->
+    <div id="modal-content-veiculo" class="modal-content">
+        <div id="modal-title">Cadastro de Veículo</div>
+        <form id="form-veiculo">
+            <label for="placa-veiculo">Placa:</label>
+            <input type="text" id="placa-veiculo" name="placa-veiculo" placeholder="Placa do veículo">
 
-        <div class="container">
-            <section id="fabricantes" class="section">
-                <h2>Fabricantes</h2>
-                <p>Informações sobre Fabricantes de automóveis</p>
-                <button id="novo-fabricante" class="botao-novo">Adicionar Fabricante</button>
-            </section>
-            <section id="modelos" class="section">
-                <h2>Modelos</h2>
-                <p>Informações sobre Modelos de automóveis</p>
-                <button id="novo-modelo" class="botao-novo">Adicionar Modelo</button>
-            </section>
-            <section id="veiculos" class="section">
-                <h2>Veiculos</h2>
-                <p>Informações sobre Veículos</p>
-                <button id="novo-veiculo" class="botao-novo">Adicionar Veiculo</button>
-            </section>
-         
-    
-    </main>
+            <label for="cor-veiculo">Cor:</label>
+            <input type="text" id="cor-veiculo" name="cor-veiculo" placeholder="Cor do veículo">
+
+            <label for="preco-veiculo">Preço:</label>
+            <input type="number" id="preco-veiculo" name="preco-veiculo" placeholder="Preço do veículo">
+
+            <label for="ano-veiculo">Ano:</label>
+            <input type="number" id="ano-veiculo" name="ano-veiculo" placeholder="Ano do veículo">
+
+            <label for="descricao-veiculo">Descrição:</label>
+            <textarea id="descricao-veiculo" name="descricao-veiculo" placeholder="Descrição do veículo"></textarea>
+
+            <label for="modelo-veiculo">Modelo:</label>
+            <select id="modelo-veiculo" name="modelo-veiculo" required>
+                <option value="" disabled selected>Selecione um modelo</option>
+            </select>
+
+            <button class="btn primary">Salvar</button>
+        </form>
+    </div>
+</div>
+
+<!-- Seções -->
+<div class="container">
+    <section id="fabricantes" class="section">
+        <h2>Fabricantes</h2>
+        <p>Informações sobre Fabricantes de automóveis</p>
+        <button id="novo-fabricante" class="botao-novo">Adicionar Fabricante</button>
+    </section>
+
+    <section id="modelos" class="section">
+        <h2>Modelos</h2>
+        <p>Informações sobre Modelos de automóveis</p>
+        <button id="novo-modelo" class="botao-novo">Adicionar Modelo</button>
+    </section>
+
+    <section id="veiculos" class="section">
+        <h2>Veículos</h2>
+        <p>Informações sobre Veículos</p>
+        <button id="novo-veiculo" class="botao-novo">Adicionar Veículo</button>
+    </section>
+</div>
+</main>
 </body>
 </html>
